@@ -1,10 +1,10 @@
 #deploy to framworkserver
-name: Build and deploy to qpon development server
+name: Build and deploy to qpon prod server
 
 on:
   workflow_dispatch:
   push:
-    branches: [ development ]  
+    branches: [ main ]  
 
 jobs:
   build:
@@ -24,31 +24,33 @@ jobs:
     - name: Copy Artifact via scp to aws server
       uses: appleboy/scp-action@master
       env:
-        HOST: ${{ secrets.DEV_SERVER }}
+        HOST: ${{ secrets.PROD_SERVER }}
         USERNAME: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
+        PASSWORD: ${{ secrets.PASSWORD }}
         KEY: ${{ secrets.KEY }}
       with:
         source: "./target/auth-server-1.0.1-SNAPSHOT.jar"
-        target: "/home/ubuntu/tmp"
+        target: "/dev/qpon"
 
     - name: Executing remote command to run the service
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.DEV_SERVER }}
+        host: ${{ secrets.PROD_SERVER }}
         USERNAME: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
+        PASSWORD: ${{ secrets.PASSWORD }}
         KEY: ${{ secrets.KEY }}
         envs:
-          DB_USERNAME:${{ secrets.DEV_DB_USER }}
-          DB_PASSWORD:${{ secrets.DEV_DB_PASS }}
+          DB_USERNAME:${{ secrets.DB_USER }}
+          DB_PASSWORD:${{ secrets.DB_PASS }}
         #script_stop: true
         script: |
-         cd /home/ubuntu/tmp/target
+         cd /dev/qpon/target
           lsof -i :8081
           kill $(lsof -t -i:8081)
-          export DB_USERNAME=${{ secrets.DEV_DB_USER }}
-          export DB_PASSWORD=${{ secrets.DEV_DB_PASS }}
+          export DB_USERNAME=${{ secrets.DB_USER }}
+          export DB_PASSWORD=${{ secrets.DB_PASS }}
          nohup java -jar auth-server-1.0.1-SNAPSHOT.jar > auth-server.log &
          netstat -lnput
 
