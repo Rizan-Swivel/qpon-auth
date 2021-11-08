@@ -64,7 +64,7 @@ jobs:
           status: ${{ job.status }}
         env:
           #SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
+          SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
