@@ -47,8 +47,11 @@ jobs:
         #script_stop: true
         script: |
          cd /dev/qpon/target
+          mv auth-server-1.0.1-SNAPSHOT.jar ../
+          cd ..
           lsof -i :8081
           kill $(lsof -t -i:8081)
+          export GOOGLE_APPLICATION_CREDENTIALS="/usr/local/bin/qpon-google-secret.json"
           export DB_USERNAME=${{ secrets.DB_USER }}
           export DB_PASSWORD=${{ secrets.DB_PASS }}
          nohup java -jar auth-server-1.0.1-SNAPSHOT.jar > auth-server.log &
