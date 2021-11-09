@@ -31,7 +31,7 @@ jobs:
         KEY: ${{ secrets.KEY }}
       with:
         source: "./target/auth-server-1.0.1-SNAPSHOT.jar"
-        target: "/dev/qpon"
+        target: "/home/qpon"
 
     - name: Executing remote command to run the service
       uses: appleboy/ssh-action@master
