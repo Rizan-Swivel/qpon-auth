@@ -51,7 +51,7 @@ jobs:
         script: |
           cd /home/ubuntu/qpon/services/
           NOW=$(date +"%m-%d-%Y-%H-%M")
-          DATE=$(date +%s)
+          DATE=$(date +"%s")
           lsof -i :8081
           kill $(lsof -t -i:8081)
           mv auth-server-1.0.1-SNAPSHOT.jar ../logs/auth-server-1.0.1-SNAPSHOT.jar.$NOW
