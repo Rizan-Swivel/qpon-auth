@@ -51,13 +51,13 @@ jobs:
           NOW=$(date +"%m-%d-%Y-%H-%M")
           lsof -i :8081
           kill $(lsof -t -i:8081)
-          mv auth-server-1.0.1-SNAPSHOT.jar ../logs/auth-server-1.0.1-SNAPSHOT.jar.$NOW
-          mv ../logs/auth-service.log ../logs/auth-service-bkp.log.$NOW
+          mv auth-server-1.0.1-SNAPSHOT.jar ../logs/bkp-auth-server-1.0.1-SNAPSHOT.jar.$NOW
+          mv ../logs/auth-service.log ../logs/bkp-auth-service.log.$NOW
           mv target/auth-server-1.0.1-SNAPSHOT.jar .
           export GOOGLE_APPLICATION_CREDENTIALS="/usr/local/bin/qpon-google-secret.json"
           export DB_USERNAME=${{ secrets.DB_USER }}
           export DB_PASSWORD=${{ secrets.DB_PASS }}
-          nohup java -jar auth-server-1.0.1-SNAPSHOT.jar > ../logs/auth-server.log &
+          nohup java -jar auth-server-1.0.1-SNAPSHOT.jar > ../logs/auth-service.log &
           netstat -lnput
 
   notify:
