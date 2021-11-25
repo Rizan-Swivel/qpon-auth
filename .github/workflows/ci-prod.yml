@@ -31,7 +31,7 @@ jobs:
         KEY: ${{ secrets.KEY }}
       with:
         source: "./target/auth-server-1.0.1-SNAPSHOT.jar"
-        target: "/home/devops/"
+        target: "/home/ubuntu/qpon/services/"
 
     - name: Executing remote command to run the service
       uses: appleboy/ssh-action@master
@@ -44,16 +44,19 @@ jobs:
         envs:
           DB_USERNAME:${{ secrets.DB_USER }}
           DB_PASSWORD:${{ secrets.DB_PASS }}
+          DATE=`date +%s`
         #script_stop: true
         script: |
-         cd /home/devops/target
+          cd /home/ubuntu/qpon/services/
+          mv target/auth-server-1.0.1-SNAPSHOT.jar.
+          mv ../logs/auth-service.log ../logs/auth-service-bkp.log.$DATE
           lsof -i :8081
-          kill $(lsof -t -i:80818)
+          kill $(lsof -t -i:8081)
           export GOOGLE_APPLICATION_CREDENTIALS="/usr/local/bin/qpon-google-secret.json"
           export DB_USERNAME=${{ secrets.DB_USER }}
           export DB_PASSWORD=${{ secrets.DB_PASS }}
-         nohup java -jar auth-server-1.0.1-SNAPSHOT.jar > auth-server.log &
-         netstat -lnput
+          nohup java -jar auth-server-1.0.1-SNAPSHOT.jar > ../logs/auth-server.log &
+          netstat -lnput
 
   notify:
     runs-on: ubuntu-latest
