@@ -45,15 +45,15 @@ jobs:
           DB_USERNAME:${{ secrets.DB_USER }}
           DB_PASSWORD:${{ secrets.DB_PASS }}
         
-        env:
-          Dat:${{ date +%s }}
+       # env:
+       #   Dat:${{ date +%s }}
         #script_stop: true
         script: |
           cd /home/ubuntu/qpon/services/
           lsof -i :8081
           kill $(lsof -t -i:8081)
-          mv auth-server-1.0.1-SNAPSHOT.jar ../logs/auth-server-1.0.1-SNAPSHOT.jar.$Dat
-          mv ../logs/auth-service.log ../logs/auth-service-bkp.log.$Dat
+          mv auth-server-1.0.1-SNAPSHOT.jar ../logs/auth-server-1.0.1-SNAPSHOT.jar.$NOW
+          mv ../logs/auth-service.log ../logs/auth-service-bkp.log.$NOW
           mv target/auth-server-1.0.1-SNAPSHOT.jar .
           export GOOGLE_APPLICATION_CREDENTIALS="/usr/local/bin/qpon-google-secret.json"
           export DB_USERNAME=${{ secrets.DB_USER }}
