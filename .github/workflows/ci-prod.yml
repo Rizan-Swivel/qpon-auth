@@ -50,6 +50,7 @@ jobs:
         #script_stop: true
         script: |
           cd /home/ubuntu/qpon/services/
+          sudo su
           NOW=$(date +"%m-%d-%Y-%H-%M")
           lsof -i :8081
           kill $(lsof -t -i:8081)
