@@ -49,8 +49,12 @@ jobs:
           cd /home/ubuntu/qpon/services/
           sudo su
           NOW=$(date +"%m-%d-%Y-%H-%M")
-          lsof -i :8081
-          kill $(lsof -t -i:8081)
+          authPID=$(lsof -t -i:8081)
+          kill $authPID
+            while [ "$( ps -p ${authPID} >/dev/null 2>&1; echo $?)" == "0" ]
+            do
+              sleep 5s
+            done
           mv auth-server-1.0.1-SNAPSHOT.jar ../logs/bkp-auth-server-1.0.1-SNAPSHOT.jar.$NOW
           mv ../logs/auth-service.log ../logs/bkp-auth-service.log.$NOW
           mv target/auth-server-1.0.1-SNAPSHOT.jar .
