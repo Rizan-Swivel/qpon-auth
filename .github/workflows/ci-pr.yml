@@ -3,7 +3,7 @@ name: Build and deploy to qpon prod server
 
 on:
   workflow_dispatch:
-  pull_request:
+  push:
     branches: [ main ]
 
 jobs:
@@ -21,47 +21,6 @@ jobs:
       #run: mvn -B clean install --file pom.xml
       run: mvn clean compile package -DskipTests
 
-    - name: Copy Artifact via scp to aws server
-      uses: appleboy/scp-action@master
-      with:
-        host: 34.203.77.88
-        username: qpon
-        password: qpon1234
-        port: 22
-        source: "./target/auth-server-1.0.1-SNAPSHOT.jar"
-        target: "/home/ubuntu/qpon/services/"
-
-    - name: Executing remote command to run the service
-      uses: appleboy/ssh-action@master
-      with:
-        host: 34.203.77.88
-        username: qpon
-        password: qpon1234
-        port: 22
-        envs:
-          DB_USERNAME:${{ secrets.DB_USER }}
-          DB_PASSWORD:${{ secrets.DB_PASS }}
-        
-        #script_stop: true
-        script: |
-          cd /home/ubuntu/qpon/services/
-          sudo su
-          NOW=$(date +"%m-%d-%Y-%H-%M")
-          authPID=$(lsof -t -i:8081)
-          kill $authPID
-            while [ "$( ps -p ${authPID} >/dev/null 2>&1; echo $?)" == "0" ]
-            do
-              sleep 5s
-            done
-          mv auth-server-1.0.1-SNAPSHOT.jar ../logs/bkp-auth-server-1.0.1-SNAPSHOT.jar.$NOW
-          mv ../logs/auth-service.log ../logs/bkp-auth-service.log.$NOW
-          mv target/auth-server-1.0.1-SNAPSHOT.jar .
-          export GOOGLE_APPLICATION_CREDENTIALS="/usr/local/bin/qpon-google-secret.json"
-          export DB_USERNAME=${{ secrets.DB_USER }}
-          export DB_PASSWORD=${{ secrets.DB_PASS }}
-          nohup java -jar auth-server-1.0.1-SNAPSHOT.jar > ../logs/auth-service.log &
-          rm -rf target
-          netstat -lnput
 
   notify:
     runs-on: ubuntu-latest
@@ -75,3 +34,4 @@ jobs:
           #SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
