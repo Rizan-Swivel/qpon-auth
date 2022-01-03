@@ -1,45 +1,40 @@
-#deploy to framworkserver
-name: Build and deploy to qpon prod server
-
-on:
-  workflow_dispatch:
-  pull_request:
-    branches: [ main ]
-
-jobs:
-  build:
+--- 
+jobs: 
+  build: 
     runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    
-    - name: Set up JDK 11
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
-
-    - name: Build with Maven
-      #run: mvn -B clean install --file pom.xml
-      run: mvn clean compile package #-DskipTests
-
-
-  notify:
-    if: ${{ failure() }}
-   # if: ${{ success() }}
-    runs-on: ubuntu-latest
+    steps: 
+      - 
+        uses: actions/checkout@v2
+      - 
+        name: "Set up JDK 11"
+        uses: actions/setup-java@v1
+        with: 
+          java-version: 11
+      - 
+        name: "Build with Maven"
+        run: "mvn clean compile package"
+  notify: 
+    if: "${{ failure() }}"
     needs: build
-    steps:
-      - uses: 8398a7/action-slack@v3
-      with:
-        status: custom
-        fields: workflow,job,commit,repo,ref,author,took
+    runs-on: ubuntu-latest
+    steps: 
+      uses: 8398a7/action-slack@v3
+      with: 
         custom_payload: |
-          {
-            attachments: [{
-              color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-              text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@${process.env.AS_REF} by ${process.env.AS_AUTHOR} ${{ job.status }} in ${process.env.AS_TOOK}`,
-            }]
-           }
-        env:
-          SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
-        if: always() # Pick up events even if the job fails or is canceled.
-
+            {
+              attachments: [{
+                color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+                text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@${process.env.AS_REF} by ${process.env.AS_AUTHOR} ${{ job.status }} in ${process.env.AS_TOOK}`,
+              }]
+             }
+        env: 
+          SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/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"
+        fields: "workflow,job,commit,repo,ref,author,took"
+        if: always()
+        status: custom
+name: "Build and deploy to qpon prod server"
+true: 
+  pull_request: 
+    branches: 
+      - main
+  workflow_dispatch: ~
