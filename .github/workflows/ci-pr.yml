@@ -38,6 +38,5 @@ jobs:
           #curl -X POST -H 'Content-type: application/json' --data '{"text":"✅ {your-job-name-here} passed."}' ${{ secrets.SLACK_WEBHOOK_URL }}
           #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        with:
           text: ":heavy_check_mark: Build success - Deploy -  Server - TEST - Azure Web pps CI/CD. :heavy_check_mark:"
 
