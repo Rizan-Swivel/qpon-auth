@@ -22,8 +22,6 @@ jobs:
       run: mvn clean compile package -DskipTests
 
 
-name: Workflow_Notify
- 
 on:
   workflow_run:
     workflows: [ "workflow_main" ]
