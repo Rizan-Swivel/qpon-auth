@@ -19,7 +19,7 @@ jobs:
 
     - name: Build with Maven
       #run: mvn -B clean install --file pom.xml
-      run: mvn clean compile package -DskipTests
+      run: mvn clean compile package #-DskipTests
 
 
   notify:
@@ -36,5 +36,4 @@ jobs:
           #SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 
