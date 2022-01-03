@@ -21,6 +21,7 @@ jobs:
       #run: mvn -B clean install --file pom.xml
       run: mvn clean compile package -DskipTests
 
+
     - name: Copy Artifact via scp to aws server
       uses: appleboy/scp-action@master
       with:
