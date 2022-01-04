@@ -19,7 +19,7 @@ jobs:
 
     - name: Build with Maven
       #run: mvn -B clean install --file pom.xml
-      run: mvn clean compile package -DskipTests
+      run: mvn clean compile package #-DskipTests
 
     - name: Notify Slack about deployment success
       if: success()
@@ -48,6 +48,6 @@ jobs:
           {
               "icon_emoji": ":boom:",
               "username": "${{ github.event.sender.login }}",
-              "text": "Deployment failed."
+              "text": "Deployment failed! Before submitting the PR, please build and execute the test locally."
           }
 
