@@ -22,6 +22,9 @@ jobs:
       run: mvn clean compile package #-DskipTests
 
   Notify:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
     - name: Notify Slack about deployment success
       if: success() # You can use the conditional checks to determine which notification to send.
       uses: wearerequired/slack-messaging-action@v1
