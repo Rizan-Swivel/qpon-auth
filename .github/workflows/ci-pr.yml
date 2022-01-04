@@ -31,7 +31,7 @@ jobs:
         payload: >-
           {
               "icon_emoji": ":rocket:",
-              "username": "Deployer",
+              "username": "${{ github.event.sender.login }}",
               "text": "Deployment success."
           }
 
@@ -45,6 +45,6 @@ jobs:
         payload: >-
           {
               "icon_emoji": ":boom:",
-              "username": "Deployer",
+              "username": "${{ github.event.sender.login }}",
               "text": "Deployment failed."
           }
