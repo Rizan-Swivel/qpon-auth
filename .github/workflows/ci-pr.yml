@@ -32,7 +32,7 @@ jobs:
         status: ${{ job.status }}
         env:
           #SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
+          #SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
           #curl -X POST -H 'Content-type: application/json' --data '{"text":"✅ {your-job-name-here} passed."}' ${{ secrets.SLACK_WEBHOOK_URL }}
           #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           INCOMING_WEBHOOK_URL: https://hooks.slack.com/services/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
