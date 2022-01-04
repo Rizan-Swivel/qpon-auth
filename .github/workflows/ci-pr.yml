@@ -28,11 +28,10 @@ jobs:
       with:
         bot_token: xoxb-2546478802199-2890421198983-UrEdMB3LFzHm0w8vbyejqVca
         message_id: ${{ steps.slack.outputs.message_id }} # Updates existing message from the first step.
-        channel: deployments
+        channel: qpon
         payload: >-
           {
               "icon_emoji": ":boom:",
               "username": "Deployer",
               "text": "Deployment failed."
           }
-          
