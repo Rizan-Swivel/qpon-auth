@@ -1,5 +1,5 @@
 #deploy to framworkserver
- name: Build and deploy to qpon prod server
+name: Build and deploy to qpon prod server
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-   build:
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -21,49 +21,50 @@ jobs:
       #run: mvn -B clean install --file pom.xml
       run: mvn clean compile package #-DskipTests
 
-notify:
-     runs-on: ubuntu-latest
+  notify:
+    runs-on: ubuntu-latest
     needs: build
-    - name: Notify Slack about deployment start
-      if: success()
-      id: slack # IMPORTANT: Reference this step ID value in future Slack steps.
-      uses: wearerequired/slack-messaging-action@v1
-      with:
-        bot_token: xoxb-2546478802199-2890421198983-UrEdMB3LFzHm0w8vbyejqVca
-        channel: qpon
-        payload: >-
-          {
-              "icon_emoji": ":rocket:",
-              "username": "Deployer",
-              "text": "Deployment started."
-          }
+    steps:
+      - name: Notify Slack about deployment start
+        if: success()
+        id: slack # IMPORTANT: Reference this step ID value in future Slack steps.
+        uses: wearerequired/slack-messaging-action@v1
+        with:
+          bot_token: xoxb-2546478802199-2890421198983-UrEdMB3LFzHm0w8vbyejqVca
+          channel: qpon
+          payload: >-
+            {
+                "icon_emoji": ":rocket:",
+                "username": "Deployer",
+                "text": "Deployment started."
+            }
 
-    - name: Deployment
+      - name: Deployment
 
-    - name: Notify Slack about deployment success
-      if: success() # You can use the conditional checks to determine which notification to send.
-      uses: wearerequired/slack-messaging-action@v1
-      with:
-        bot_token: xoxb-2546478802199-2890421198983-UrEdMB3LFzHm0w8vbyejqVca
-        message_id: ${{ steps.slack.outputs.message_id }} # Updates existing message from the first step.
-        channel: qpon
-        payload: >-
-          {
-              "icon_emoji": ":rocket:",
-              "username": "Deployer",
-              "text": "Deployment finished."
-          }
+      - name: Notify Slack about deployment success
+        if: success() # You can use the conditional checks to determine which notification to send.
+        uses: wearerequired/slack-messaging-action@v1
+        with:
+          bot_token: xoxb-2546478802199-2890421198983-UrEdMB3LFzHm0w8vbyejqVca
+          message_id: ${{ steps.slack.outputs.message_id }} # Updates existing message from the first step.
+          channel: qpon
+          payload: >-
+            {
+                "icon_emoji": ":rocket:",
+                "username": "Deployer",
+                "text": "Deployment finished."
+            }
 
-    - name: Notify Slack about deployment fail
-      if: failure() # You can use the conditional checks to determine which notification to send.
-      uses: wearerequired/slack-messaging-action@v1
-      with:
-        bot_token: xoxb-2546478802199-2890421198983-UrEdMB3LFzHm0w8vbyejqVca
-        message_id: ${{ steps.slack.outputs.message_id }} # Updates existing message from the first step.
-        channel: qpon
-        payload: >-
-          {
-              "icon_emoji": ":boom:",
-              "username": "Deployer",
-              "text": "Deployment failed."
-          }
+      - name: Notify Slack about deployment fail
+        if: failure() # You can use the conditional checks to determine which notification to send.
+        uses: wearerequired/slack-messaging-action@v1
+        with:
+          bot_token: xoxb-2546478802199-2890421198983-UrEdMB3LFzHm0w8vbyejqVca
+          message_id: ${{ steps.slack.outputs.message_id }} # Updates existing message from the first step.
+          channel: qpon
+          payload: >-
+            {
+                "icon_emoji": ":boom:",
+                "username": "Deployer",
+                "text": "Deployment failed."
+            }
