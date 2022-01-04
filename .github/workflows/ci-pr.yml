@@ -1,5 +1,5 @@
 #deploy to framworkserver
-name: Build and deploy to qpon prod server
+name: Build and Test the PR
 
 on:
   workflow_dispatch:
