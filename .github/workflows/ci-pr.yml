@@ -26,7 +26,7 @@ jobs:
       if: failure() # You can use the conditional checks to determine which notification to send.
       uses: wearerequired/slack-messaging-action@v1
       with:
-        bot_token: xapp-1-A02KKFHJQF8-2905000942066-3bbaf33d787a7a8c2ded72b576d3cd6353706d4aa17c51b6e7c5c785a26fd064
+        bot_token: xoxb-2546478802199-2890421198983-UrEdMB3LFzHm0w8vbyejqVca
         message_id: ${{ steps.slack.outputs.message_id }} # Updates existing message from the first step.
         channel: deployments
         payload: >-
