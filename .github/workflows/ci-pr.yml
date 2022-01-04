@@ -47,7 +47,7 @@ jobs:
           {
               "icon_emoji": ":rocket:",
               "username": "Deployer",
-              "text": "Deployment finished."
+              "text": "Deployment success."
           }
 
     - name: Notify Slack about deployment fail
