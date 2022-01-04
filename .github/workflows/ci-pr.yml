@@ -21,6 +21,7 @@ jobs:
       #run: mvn -B clean install --file pom.xml
       run: mvn clean compile package #-DskipTests
 
+  Notify:
     - name: Notify Slack about deployment success
       if: success() # You can use the conditional checks to determine which notification to send.
       uses: wearerequired/slack-messaging-action@v1
