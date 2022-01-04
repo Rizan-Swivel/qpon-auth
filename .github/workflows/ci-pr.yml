@@ -27,9 +27,14 @@ jobs:
     needs: build
     steps:
       
-        - uses: someimportantcompany/github-actions-slack-message@v1
-          id: slack
+        - uses: actions/checkout@v2
+        - uses: iRoachie/slack-github-actions@v2.3.0
           with:
-            channel: C02G2E2PWBZ
-            bot-token: xoxe.xoxp-1-Mi0yLTI1NDY0Nzg4MDIxOTktMjU3Mzc4MDIxNTc2MS0yOTA2Njg5ODU1OTQwLTI4OTc3MTcyNzExNTgtZjg5ZTY4ZWZkODQ1ZDlhMTcxNDRkNDBhYWViYTA5NmUwY2E4OGJiMTMwMmUyODFlMTkxNThjODlmNGRjOTAzNQ
-            text: Deployment started
+            status: ${{ job.status }}
+        env:
+          #SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
+          #curl -X POST -H 'Content-type: application/json' --data '{"text":"✅ {your-job-name-here} passed."}' ${{ secrets.SLACK_WEBHOOK_URL }}
+          #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INCOMING_WEBHOOK_URL: https://hooks.slack.com/services/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
+          text: ":heavy_check_mark: Build success - Deploy -  Server - TEST - Azure Web pps CI/CD. :heavy_check_mark:"
