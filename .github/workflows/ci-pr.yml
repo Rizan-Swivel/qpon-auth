@@ -35,7 +35,6 @@ jobs:
               "text": "Deployment started."
           }
 
-    - name: Deployment
 
     - name: Notify Slack about deployment success
       if: success() # You can use the conditional checks to determine which notification to send.
