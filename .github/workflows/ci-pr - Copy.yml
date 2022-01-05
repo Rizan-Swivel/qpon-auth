@@ -53,12 +53,3 @@ jobs:
               "text": "Deployment failed."
           }
 
-
-    - name: Send custom JSON data to Slack workflow
-      id: slack
-      uses: slackapi/slack-github-action@v1.16.0
-      with:
-        payload: "{\"key\":\"value\",\"foo\":\"bar\"}" # This data can be any valid JSON from a previous step in the GitHub Action
-      env:
-        #SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
