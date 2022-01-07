@@ -49,8 +49,8 @@ jobs:
           sudo su
           NOW=$(date +"%m-%d-%Y-%H-%M")
           authPID=$(lsof -t -i:8081)
-          #kill -HUP $authPID
-          trap 'kill $(authPID) 2>/dev/null' exit
+          kill -9 $authPID
+          #trap 'kill $(authPID) 2>/dev/null' exit
             while [ "$( ps -p ${authPID} >/dev/null 2>&1; echo $?)" == "0" ]
             do
               sleep 5s
