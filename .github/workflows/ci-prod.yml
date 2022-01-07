@@ -49,7 +49,7 @@ jobs:
           sudo su
           NOW=$(date +"%m-%d-%Y-%H-%M")
           authPID=$(lsof -t -i:8081)
-          kill $authPID
+          kill -HUP $authPID
             while [ "$( ps -p ${authPID} >/dev/null 2>&1; echo $?)" == "0" ]
             do
               sleep 5s
