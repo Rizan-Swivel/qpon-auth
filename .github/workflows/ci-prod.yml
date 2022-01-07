@@ -35,7 +35,7 @@ jobs:
     - name: Executing remote command to run the service
       uses: appleboy/ssh-action@master
       with:
-        host: 34.203.77.88
+        host: 18.210.33.246
         username: qpon
         password: qpon1234
         port: 22
