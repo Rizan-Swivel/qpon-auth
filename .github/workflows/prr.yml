@@ -1,5 +1,5 @@
 #deploy to framworkserver
-name: Build and Test your service
+name: Build and Test your code before merging the PR
 
 on:
   workflow_dispatch:
