@@ -44,6 +44,6 @@ jobs:
           SLACK_TITLE: ‘Pull request’
           SLACK_USERNAME: ‘Gittan’
           #SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+          SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
 
 
