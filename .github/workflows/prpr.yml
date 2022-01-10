@@ -4,9 +4,9 @@ name: Build and deploy to qpon prod server
 on:
   workflow_dispatch:
   pull_request:
-    branches: [ main ]
+    branches: [ failure ]
   push:
-    branches: [ main ]
+    branches: [ failure ]
 
 jobs:
   build:
