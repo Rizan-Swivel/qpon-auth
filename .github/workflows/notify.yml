@@ -1,0 +1,26 @@
+#deploy to framworkserver
+name: Build and deploy to qpon prod server
+
+  notify:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    #  - uses: actions/checkout@v2
+    #  - uses: iRoachie/slack-github-actions@v2.3.0
+    #    with:
+    #      status: ${{ job.status }}
+    #    env:
+    #      #SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+    #      SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
+    #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #      status: ${{ job.status }}
+    #    if: ${{ always() }}
+
+      - uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_CHANNEL: devopstest
+          SLACK_MESSAGE: ‘Please review on https://github.com/YOUR_PATH/YOUR_REPO_NAME/pull/${{ env.pull_number}}’
+          SLACK_TITLE: ‘Pull request’
+          SLACK_USERNAME: ‘Gittan’
+          #SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
