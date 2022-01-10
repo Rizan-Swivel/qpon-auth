@@ -23,9 +23,6 @@ jobs:
       #run: mvn -B clean install --file pom.xml
       run: mvn clean compile package #-DskipTests
 
-  Notification:
-    runs-on: ubuntu-latest
-    steps:
     - name: Notify Slack about deployment success
       if: success()
       uses: someimportantcompany/github-actions-slack-message@v1
