@@ -48,12 +48,20 @@ jobs:
           cd /home/ubuntu/qpon/services/
           sudo su
           NOW=$(date +"%m-%d-%Y-%H-%M")
-          authPID=$(lsof -t -i:8081)
-          sudo kill -9 $authPID
+          #authPID=$(lsof -t -i:8081)
+          #sudo kill -9 $authPID
           #trap 'kill $(authPID) 2>/dev/null' exit
-            while [ "$( ps -p ${authPID} >/dev/null 2>&1; echo $?)" == "0" ]
+            #while [ "$( ps -p ${authPID} >/dev/null 2>&1; echo $?)" == "0" ]
+            #do
+              #sleep 5s
+            #done
+          declare -i pid
+          unset pid
+          pid=$(lsof -t -i tcp:8081 -s tcp:listen)
+          sudo lsof -t -i tcp:8081 -s tcp:listen | sudo xargs kill
+            while [ "$( ps -p ${pid} >/dev/null 2>&1; echo $?)" == "0" ]
             do
-              sleep 5s
+              sleep 10s
             done
           mv auth-server-1.0.1-SNAPSHOT.jar ../logs/bkp-auth-server-1.0.1-SNAPSHOT.jar.$NOW
           mv ../logs/auth-service.log ../logs/bkp-auth-service.log.$NOW
