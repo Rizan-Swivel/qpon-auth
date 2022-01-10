@@ -26,6 +26,6 @@ jobs:
           SLACK_CHANNEL: devopstest
           SLACK_MESSAGE: The build is failure
           #SLACK_TITLE: PR Request
-          #SLACK_USERNAME: ${{ github.event.sender.login }}
+          SLACK_USERNAME: ${{ github.event.sender.login }}
           #SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK: https://hooks.slack.com/services/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
