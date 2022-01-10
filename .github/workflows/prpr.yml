@@ -27,8 +27,8 @@ jobs:
     steps:
     - name: Notify Slack about deployment success
       if: success() # You can use the conditional checks to determine which notification to send.
-      - uses: rtCamp/action-slack-notify@master
-        env:
+    - uses: rtCamp/action-slack-notify@master
+      env:
           SLACK_CHANNEL: devopstest
           SLACK_MESSAGE: The build is success
           #SLACK_TITLE: PR Request
@@ -38,8 +38,8 @@ jobs:
 
     - name: Notify Slack about deployment fail
       if: failure() # You can use the conditional checks to determine which notification to send.
-      - uses: rtCamp/action-slack-notify@master
-        env:
+    - uses: rtCamp/action-slack-notify@master
+      env:
           SLACK_CHANNEL: devopstest
           SLACK_MESSAGE: The build is failure
           #SLACK_TITLE: PR Request
