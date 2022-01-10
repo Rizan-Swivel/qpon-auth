@@ -1,5 +1,5 @@
 #deploy to framworkserver
-name: Build and deploy to qpon prod server
+name: Build and Test your service
 
 on:
   workflow_dispatch:
@@ -28,12 +28,11 @@ jobs:
       uses: someimportantcompany/github-actions-slack-message@v1
       with:
         webhook-url: https://hooks.slack.com/services/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
-        text: Firing a webhook message success
-        icon_emoji: ":rocket:"
+        text: Build and Test success
         
     - name: Notify Slack about deployment failure
       if: failure()
       uses: someimportantcompany/github-actions-slack-message@v1
       with:
         webhook-url: https://hooks.slack.com/services/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
-        text: Firing a webhook message failure
+        text: Build and Test failed! Before submitting the PR, please build and execute the test locally
