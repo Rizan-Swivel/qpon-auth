@@ -29,7 +29,8 @@ jobs:
       with:
         webhook-url: https://hooks.slack.com/services/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
         text: Firing a webhook message success
-    
+        icon_emoji: ":rocket:"
+        
     - name: Notify Slack about deployment failure
       if: failure()
       uses: someimportantcompany/github-actions-slack-message@v1
