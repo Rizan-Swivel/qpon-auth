@@ -4,7 +4,7 @@ name: notify
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: [ sssddd ]
     
 jobs:
   notify:
