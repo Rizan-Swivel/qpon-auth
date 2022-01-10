@@ -1,6 +1,11 @@
 #deploy to framworkserver
 name: Build and deploy to qpon prod server
 
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    
   notify:
     runs-on: ubuntu-latest
     needs: build
