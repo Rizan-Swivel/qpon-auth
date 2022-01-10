@@ -23,7 +23,7 @@ jobs:
       #run: mvn -B clean install --file pom.xml
       run: mvn clean compile package #-DskipTests
 
-  Notify:
+  Notification:
     runs-on: ubuntu-latest
     needs: build
     steps:
