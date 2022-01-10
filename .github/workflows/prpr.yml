@@ -21,7 +21,7 @@ jobs:
 
     - name: Build with Maven
       #run: mvn -B clean install --file pom.xml
-      run: mvn clean compile package #-DskipTests
+      run: mvn clean compile package -DskipTests
 
   Notify:
     runs-on: ubuntu-latest
