@@ -21,11 +21,10 @@ jobs:
 
     - name: Build with Maven
       #run: mvn -B clean install --file pom.xml
-      run: mvn clean compile package -DskipTests
+      run: mvn clean compile package #-DskipTests
 
   Notification:
     runs-on: ubuntu-latest
-    needs: build
     steps:
     - name: Notify Slack about deployment success
       if: success()
