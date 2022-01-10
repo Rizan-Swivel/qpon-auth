@@ -21,14 +21,14 @@ jobs:
 
     - name: Build with Maven
       #run: mvn -B clean install --file pom.xml
-      run: mvn clean compile package -DskipTests
+      run: mvn clean compile package #-DskipTests
 
   Notify:
     runs-on: ubuntu-latest
     needs: build
     steps:
     - name: Notify Slack about deployment success
-      if: success() # You can use the conditional checks to determine which notification to send.
+      if: success()
       uses: rtCamp/action-slack-notify@master
       env:
           SLACK_CHANNEL: devopstest
@@ -37,9 +37,10 @@ jobs:
           SLACK_USERNAME: ${{ github.event.sender.login }}
           #SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK: https://hooks.slack.com/services/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
+          
 
-    - name: Notify Slack about deployment fail
-      if: failure() # You can use the conditional checks to determine which notification to send.
+    - name: Notify Slack about deployment failire
+      if: failure()
       uses: rtCamp/action-slack-notify@master
       env:
           SLACK_CHANNEL: devopstest
