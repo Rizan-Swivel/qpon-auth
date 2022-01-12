@@ -11,6 +11,7 @@ This service is use as Authorization server to authenticate and authorized
 ## Dependencies
 All dependencies are available in pom.xml.
 
+
 ## Note
 
 ## Configuration
