@@ -28,6 +28,7 @@ mvn spring-boot:run
 ```
 or
 ```
+jnkjb
 java -jar target/auth-server-1.0.0-SNAPSHOT.jar
 ```
 
