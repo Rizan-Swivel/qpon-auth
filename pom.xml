@@ -119,5 +119,9 @@
             </plugin>
         </plugins>
     </build>
+    <properties>
+         <sonar.organization>rizan-swivel</sonar.organization>
+         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    </properties>
 
 </project>
