@@ -2,9 +2,9 @@ name: Master Branch
 
 on:
   push:
-    branches: [ main ]
+    branches: [ maixn ]
   pull_request:
-    branches: [ main ]
+    branches: [ mxain ]
 
 jobs:
   test:
