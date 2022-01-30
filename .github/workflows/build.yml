@@ -17,6 +17,6 @@ jobs:
         #uses: SonarSource/sonarcloud-github-action@master
         run: mvn clean sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=rizan-swivel -Dsonar.login=bd7e2a50cb3b1093ab71a21ec733bb5521986657
         env:
-          GITHUB_TOKEN: ${{ secrets.SONARTOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: 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
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
