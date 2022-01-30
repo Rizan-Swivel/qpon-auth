@@ -173,7 +173,7 @@
             <properties>
                 <sonar.host.url>https://sonarcloud.io</sonar.host.url>
                 <sonar.organization>rizan-swivel</sonar.organization>
-                <sonar.projectKey>MagicSoup_SpringJOOQ</sonar.projectKey>
+                <sonar.projectKey>Rizan-Swivel_qpon-auth</sonar.projectKey>
                 <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
                 <sonar.exclusions>${code.coverage.exclusions}</sonar.exclusions>
                 <sonar.report>${aggregate.report.dir}</sonar.report>
